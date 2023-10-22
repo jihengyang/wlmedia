@@ -3,6 +3,10 @@
 buildscript {
     
     repositories {
+        maven {
+            // 公司收敛maven仓库，App只使用android_public。若发现有依赖无法下载，可向基础技术组反馈
+            url 'http://maven.byted.org/repository/android_public/'
+        }
         google()
         jcenter()
     }
@@ -18,10 +22,21 @@ buildscript {
 
 allprojects {
     repositories {
+        maven {
+            // 公司收敛maven仓库，App只使用android_public。若发现有依赖无法下载，可向基础技术组反馈
+            url 'http://maven.byted.org/repository/android_public/'
+        }
         google()
         jcenter()
         maven { url 'https://jitpack.io' }
     }
+}
+
+
+// 集成下面的插件可实现自动安装Wrangler AS Plugin
+try {
+    apply from: 'https://wrangler.web.bytedance.net/wranglerInstall.gradle'
+} catch (Throwable ignore) {
 }
 
 task clean(type: Delete) {
